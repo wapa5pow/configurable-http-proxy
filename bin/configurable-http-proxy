@@ -6,7 +6,8 @@
 // Distributed under the terms of the Modified BSD License.
 //
 
-var fs = require("fs"),
+var nr = require('newrelic'),
+  fs = require("fs"),
   pkg = require("../package.json"),
   args = require("commander"),
   strftime = require("strftime"),
