@@ -45,7 +45,7 @@ describe("Proxy Tests", function() {
     });
   });
 
-  it("basic WebSocker request", function(done) {
+  it("basic WebSocket request", function(done) {
     var ws = new WebSocket("ws://127.0.0.1:" + port);
     ws.on("error", function() {
       // jasmine fail is only in master
@@ -210,6 +210,28 @@ describe("Proxy Tests", function() {
     });
   });
 
+  it("options.storageBackend", function(done) {
+    const options = {
+      storageBackend: "mybackend",
+    };
+    expect(() => {
+      const cp = new ConfigurableProxy(options);
+    }).toThrowMatching(function(e) {
+      return e.message.includes("Cannot find module 'mybackend'");
+    });
+    done();
+  });
+
+  it("options.storageBackend with an user-defined backend", function(done) {
+    const store = path.resolve(__dirname, "dummy-store.js");
+    const options = {
+      storageBackend: store,
+    };
+    const cp = new ConfigurableProxy(options);
+    expect(cp._routes.constructor.name).toEqual("PlugableDummyStore");
+    done();
+  });
+
   it("includePrefix: false + prependPath: false", function(done) {
     proxy.includePrefix = false;
     proxy.proxy.options.prependPath = false;
@@ -345,5 +367,13 @@ describe("Proxy Tests", function() {
         expect(err.response.headers.location).toEqual(expectedRedirect);
       })
       .then(done);
+  });
+
+  it("health check request", function(done) {
+    r(proxyUrl + "/_chp_healthz").then(body => {
+      body = JSON.parse(body);
+      expect(body).toEqual({ status: "OK" });
+      done();
+    });
   });
 });

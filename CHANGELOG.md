@@ -4,7 +4,77 @@ For detailed changes from the prior release, click on the version number, and
 its link will bring up a GitHub listing of changes. Use `git log` on the
 command line for details.
 
-## [3.0] - 2017-09-19
+## [Unreleased]
+
+## [4.2.1] - 2020-03-11
+
+#### Summary
+
+This is a security release, fixing node package dependencies to
+configurable-http-proxy, which itself was left untouched.
+
+#### Merged PRs
+
+- Security Fixes [#226](https://github.com/jupyterhub/configurable-http-proxy/pull/226) ([@rafael-ladislau](https://github.com/rafael-ladislau))
+- Update dependency commander to ~4.1.0 [#225](https://github.com/jupyterhub/configurable-http-proxy/pull/225) ([@renovate](https://github.com/renovate))
+
+## [4.2.0] - 2019-11-14
+
+#### Summary
+
+- Now terminates on `SIGTERM` as can be caused by `docker stop` or `kubectl delete`
+- Add `--timeout` option to configure when to drop a request
+- Add `--custom-header` option that enables proxied requests to get additional headers attached
+- Support setting of the environment variable `CONFIGPROXY_AUTH_TOKEN` using a mounted file on the Docker image's container
+- Node version bumped from 10 to 12.13.0 in the Docker image
+- Various dependencies updated, including addressing security advisories from `npm audit` which do not affect CHP security itself.
+
+#### Merged PRs
+
+- RELEASE.md documentation and small fixes [#220](https://github.com/jupyterhub/configurable-http-proxy/pull/220) ([@consideRatio](https://github.com/consideRatio))
+- Terminate on SIGTERM [#217](https://github.com/jupyterhub/configurable-http-proxy/pull/217) ([@consideRatio](https://github.com/consideRatio))
+- Fix Vulnerabilities [#216](https://github.com/jupyterhub/configurable-http-proxy/pull/216) ([@rafael-ladislau](https://github.com/rafael-ladislau))
+- Update dependency commander to v4 [#214](https://github.com/jupyterhub/configurable-http-proxy/pull/214) ([@renovate](https://github.com/renovate))
+- chore: Udpate node, replace add with copy [#213](https://github.com/jupyterhub/configurable-http-proxy/pull/213) ([@jgwerner](https://github.com/jgwerner))
+- Update dependency http-proxy to ~1.18.0 [#212](https://github.com/jupyterhub/configurable-http-proxy/pull/212) ([@renovate](https://github.com/renovate))
+- Change user to numeric value for k8s compatibility [#211](https://github.com/jupyterhub/configurable-http-proxy/pull/211) ([@m2hofi94](https://github.com/m2hofi94))
+- Add file_env function to set the token env var [#209](https://github.com/jupyterhub/configurable-http-proxy/pull/209) ([@rcthomas](https://github.com/rcthomas))
+- Allow setting request timeout [#208](https://github.com/jupyterhub/configurable-http-proxy/pull/208) ([@archite](https://github.com/archite))
+- Command line option for custom headers [#206](https://github.com/jupyterhub/configurable-http-proxy/pull/206) ([@ivan-gomes](https://github.com/ivan-gomes))
+- chore(deps): update dependency nyc to v14 [#202](https://github.com/jupyterhub/configurable-http-proxy/pull/202) ([@renovate](https://github.com/renovate))
+- Update dependency commander to ~2.20.0 [#201](https://github.com/jupyterhub/configurable-http-proxy/pull/201) ([@renovate](https://github.com/renovate))
+
+## [4.1.0] - 2019-04-01
+
+- Add `--redirect-to` option to specify destination port when redirecting
+  http to https with `--redirect-from`.
+- Add health check endpoint at `/_chp_healthz`.
+- Docker base image is updated to `node/10-alpine` from `node/6-alpine`
+- Dependencies are updated via Renovate
+
+## [4.0.0] - 2018-10-12
+
+- Add support for client SSL certificates for encrypting proxied requests.
+- Update all nodejs dependencies. Most significant is updating winston (logging) from 2 to 3. There is no longer a global logger,
+  instead use `this.log`.
+- Drop support for node 4. Minimum node version is 6.
+- Support CONFIGPROXY_SSL_KEY_PASSPHRASE env for setting the passphrase of ssl keys (API_SSL for api ssl key).
+
+## [3.1.1] - 2018-01-15
+
+- Fix a bug when using the new custom storage backend support
+  where the body of requests could be lost.
+
+## [3.1.0] - 2017-11-03
+
+3.1 adds two new features:
+
+- Add `--change-origin` passthrough for node-http-proxy's changeOrigin option.
+- Add support via `--storage-backend <storage-class>` for custom storage classes.
+  See [configurable-http-proxy-redis-backend](https://github.com/globocom/configurable-http-proxy-redis-backend)
+  for an example using redis.
+
+## [3.0.0] - 2017-09-19
 
 3.0 is a major release because much of the code has been reorganized
 to adopt some javascript standards:
@@ -119,8 +189,13 @@ Improvements:
 
 ## 0.1.1 - 2014-10-01
 
-[Unreleased]: https://github.com/jupyterhub/configurable-http-proxy/compare/2.0.2...HEAD
-[2.0]: https://github.com/jupyterhub/configurable-http-proxy/compare/1.3.1...2.0.1
+[Unreleased]: https://github.com/jupyterhub/configurable-http-proxy/compare/4.1.0...HEAD
+[4.1]: https://github.com/jupyterhub/configurable-http-proxy/compare/4.0.1...4.1.0
+[4.0]: https://github.com/jupyterhub/configurable-http-proxy/compare/3.1.1...4.0.1
+[3.1.1]: https://github.com/jupyterhub/configurable-http-proxy/compare/3.1.0...3.1.1
+[3.1]: https://github.com/jupyterhub/configurable-http-proxy/compare/3.0.0...3.1.0
+[3.0]: https://github.com/jupyterhub/configurable-http-proxy/compare/2.0.4...3.0.0
+[2.0]: https://github.com/jupyterhub/configurable-http-proxy/compare/1.3.1...2.0.4
 [1.3]: https://github.com/jupyterhub/configurable-http-proxy/compare/1.2.0...1.3.0
 [1.2]: https://github.com/jupyterhub/configurable-http-proxy/compare/1.1.0...1.2.0
 [1.1]: https://github.com/jupyterhub/configurable-http-proxy/compare/1.0.0...1.1.0
