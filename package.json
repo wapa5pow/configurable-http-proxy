@@ -1,5 +1,5 @@
 {
-  "version": "4.2.1",
+  "version": "4.2.2",
   "name": "configurable-http-proxy",
   "description": "A configurable-on-the-fly HTTP Proxy",
   "author": "Jupyter Developers",
@@ -9,21 +9,21 @@
     "url": "https://github.com/jupyterhub/configurable-http-proxy.git"
   },
   "dependencies": {
-    "commander": "~4.1.0",
-    "http-proxy": "~1.18.0",
+    "commander": "~6.1.0",
+    "http-proxy": "^1.18.1",
     "lynx": "^0.2.0",
     "newrelic": "^5.6.3",
     "strftime": "~0.10.0",
-    "winston": "~3.2.0"
+    "winston": "~3.3.0"
   },
   "devDependencies": {
     "jasmine": "^3.5.0",
     "jshint": "^2.10.2",
     "nyc": "^15.0.0",
-    "prettier": "^1.4.4",
+    "prettier": "^2.0.0",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.4",
-    "ws": "^6.0.0"
+    "ws": "^7.0.0"
   },
   "engines": {
     "node": ">= 6.0"
